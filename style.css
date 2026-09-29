@@ -1,7 +1,7 @@
 .container {
   background-color: rgb(223, 229, 192);
   text-align: center;
-  width: 240px;
+  width: 300px;
   margin: auto;
   border: solid 2px black;
   border-radius: 4px;
@@ -22,7 +22,7 @@ li {
 
 li button {
   position: absolute;
-  right: 32px;
+  right: 50px;
 }
 
 .checked {
@@ -66,4 +66,9 @@ button:hover {
 input {
   cursor: pointer;
   margin-bottom: 10px;
+}
+
+.input-container button {
+  position: absolute;
+  right: 50px;
 }
