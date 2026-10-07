@@ -1,21 +1,28 @@
+// Mina DOM element
 const inputTodo = document.querySelector("#inputTodo");
 const addBtn = document.querySelector("#addBtn");
 const list = document.querySelector("ul");
 const completed = document.querySelector("#completed");
+const errorMsg = document.querySelector("#errorMsg");
+
 let completedTasks = 0;
 const myTodo = [];
 
+/* Min ToDo function. All logik som sker i samband med min ToDo-list
+ska skrivas här inne.*/
 addBtn.addEventListener("click", function () {
   const text = inputTodo.value;
   if (text.length < 1) {
-    alert("Write something in the input field");
+    errorMsg.innerHTML = "Write something in the input field";
   } else {
+    errorMsg.innerHTML = "";
     const todoObject = {
       text: text,
       completed: false
     };
     myTodo.push(todoObject);
 
+    // Själva logiken i en Todo. Här skapar jag DOM element som även appendas av parent elementet så det syns i webben.
     const listItem = document.createElement("li");
     list.appendChild(listItem);
 
@@ -27,6 +34,7 @@ addBtn.addEventListener("click", function () {
     removeBtn.innerHTML = "&#128465";
     listItem.appendChild(removeBtn);
 
+    /* Här ändrar jag min object key. Jag kollar även ifall mitt element har klassen .checked eller inte. För att uppdatera completedTasks.  */
     listItem.addEventListener("click", function () {
       todoObject.completed = !todoObject.completed;
       listItem.classList.toggle("checked");
@@ -38,6 +46,9 @@ addBtn.addEventListener("click", function () {
       completed.innerHTML = `${completedTasks} completed`;
     });
 
+    /* När man trycker på papperskorgen tas objektet bort från arrayen.
+    För att slippa få en bugg var jag tvungen att använda .stopPropagation(),
+    som gör att eventet inte aktiveras på något annat element. */
     removeBtn.addEventListener("click", function (event) {
       event.stopPropagation();
       if (todoObject.completed) {
